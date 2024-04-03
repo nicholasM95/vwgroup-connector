@@ -15,6 +15,16 @@
         <feign.version>11.10</feign.version>
     </properties>
 
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>VW Group Connector</name>
+            <url>https://maven.pkg.github.com/nicholasM95/vwgroup-connector</url>
+        </repository>
+    </distributionManagement>
+
+
     <dependencies>
         <dependency>
             <groupId>io.github.openfeign</groupId>

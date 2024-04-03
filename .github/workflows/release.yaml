@@ -51,6 +51,9 @@ jobs:
       - name: Build with Maven Wrapper
         run: ./mvnw install -DskipTests
 
+      - name: Maven Deploy
+        run: ./mvnw deploy -DskipTests
+
       - name: Create Release
         run: npx semantic-release
         env:
