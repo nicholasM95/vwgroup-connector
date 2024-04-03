@@ -12,7 +12,7 @@
 
     <properties>
         <java.version>21</java.version>
-        <feign.version>11.10</feign.version>
+        <feign.version>13.2.1</feign.version>
     </properties>
 
 
