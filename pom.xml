@@ -5,7 +5,7 @@
 
     <groupId>be.nicholasmeyers.vwgroup-connector</groupId>
     <artifactId>vwgroup-connector</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>vwgroup-connector</name>
     <description>vwgroup-connector</description>
@@ -14,6 +14,16 @@
         <java.version>21</java.version>
         <feign.version>11.10</feign.version>
     </properties>
+
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>VW Group Connector</name>
+            <url>https://maven.pkg.github.com/nicholasM95/vwgroup-connector</url>
+        </repository>
+    </distributionManagement>
+
 
     <dependencies>
         <dependency>

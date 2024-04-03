@@ -41,13 +41,6 @@ jobs:
         run: |
           npm install semantic-release @semantic-release/exec @semantic-release/changelog @semantic-release/github
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@5f4866a30a54f16a52d2ecb4a3898e9e424939cf
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Calculate next version
         run: |
           npx semantic-release --dry-run --no-ci
@@ -57,6 +50,11 @@ jobs:
 
       - name: Build with Maven Wrapper
         run: ./mvnw install -DskipTests
+
+      - name: Maven Deploy
+        run: ./mvnw deploy -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         run: npx semantic-release
