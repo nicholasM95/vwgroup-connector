@@ -53,6 +53,8 @@ jobs:
 
       - name: Maven Deploy
         run: ./mvnw deploy -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         run: npx semantic-release
