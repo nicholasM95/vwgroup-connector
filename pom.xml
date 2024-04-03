@@ -5,14 +5,14 @@
 
     <groupId>be.nicholasmeyers.vwgroup-connector</groupId>
     <artifactId>vwgroup-connector</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <name>vwgroup-connector</name>
     <description>vwgroup-connector</description>
 
     <properties>
         <java.version>21</java.version>
-        <feign.version>11.10</feign.version>
+        <feign.version>13.2.1</feign.version>
     </properties>
 
 
