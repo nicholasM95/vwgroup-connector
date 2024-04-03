@@ -51,13 +51,14 @@ jobs:
       - name: Build with Maven Wrapper
         run: ./mvnw install -DskipTests
 
-      - name: Maven Deploy
-        run: ./mvnw deploy -DskipTests
+      - name: Create Release
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release
-        run: npx semantic-release
+      - name: Maven Deploy
+        if: github.ref == 'refs/heads/main'
+        run: ./mvnw deploy -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
