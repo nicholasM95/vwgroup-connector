@@ -1,0 +1,81 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - develop
+
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  JAVA_VERSION: '21'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Set up JDK
+        uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4.2.1
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'liberica'
+          cache: 'maven'
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 20
+
+      - name: Install Semantic Release and plugins
+        run: |
+          npm install semantic-release @semantic-release/exec @semantic-release/changelog @semantic-release/github
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@5f4866a30a54f16a52d2ecb4a3898e9e424939cf
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Calculate next version
+        run: |
+          npx semantic-release --dry-run --no-ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SKIP_UPDATE_VERSION_IN_POM: true
+
+      - name: Build with Maven Wrapper
+        run: ./mvnw install -DskipTests
+
+      - name: Create Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update CHANGELOG.md
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add CHANGELOG.md
+          git commit -m "docs(CHANGELOG): Update CHANGELOG.md"
+          git push origin main
+
+      - name: Update develop branch
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git fetch origin
+          git checkout develop
+          git merge --ff-only origin/main
+          git push origin develop
