@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/nicholasM95/vwgroup-connector/compare/v1.1.0...v1.2.0) (2024-05-21)
+
+
+### Features
+
+* add token cache ([da6f319](https://github.com/nicholasM95/vwgroup-connector/commit/da6f3190aeb6223c267d01e3201eb7a9d5bae903))
+
 # [1.1.0](https://github.com/nicholasM95/vwgroup-connector/compare/v1.0.2...v1.1.0) (2024-05-21)
 
 
