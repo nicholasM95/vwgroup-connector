@@ -37,6 +37,8 @@
         <tag>HEAD</tag>
     </scm>
 
+    <url>https://vwgroup-connector.nicholasmeyers.be</url>
+
     <dependencies>
         <dependency>
             <groupId>io.github.openfeign</groupId>
