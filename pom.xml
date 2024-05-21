@@ -5,7 +5,7 @@
 
     <groupId>be.nicholasmeyers.vwgroup-connector</groupId>
     <artifactId>vwgroup-connector</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0-SNAPSHOT</version>
 
     <name>vwgroup-connector</name>
     <description>vwgroup-connector</description>
@@ -13,12 +13,13 @@
     <properties>
         <java.version>21</java.version>
         <feign.version>13.2.1</feign.version>
+        <jose4j.version>0.9.6</jose4j.version>
     </properties>
 
     <licenses>
         <license>
-            <name>The Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <name>The MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
 
@@ -37,7 +38,7 @@
         <tag>HEAD</tag>
     </scm>
 
-    <url>https://vwgroup-connector.nicholasmeyers.be</url>
+    <url>https://github.com/nicholasM95/vwgroup-connector/</url>
 
     <dependencies>
         <dependency>
@@ -65,6 +66,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.bitbucket.b_c</groupId>
+            <artifactId>jose4j</artifactId>
+            <version>${jose4j.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.10.2</version>
@@ -86,7 +93,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
