@@ -56,14 +56,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Maven Deploy
-        if: github.ref == 'refs/heads/main'
-        run: ./mvnw deploy -DskipTests
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Publish to the Maven Central Repository
-        run: ./mvnw --batch-mode deploy
+        run: ./mvnw --batch-mode deploy -DskipTests
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
