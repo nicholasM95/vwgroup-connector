@@ -57,10 +57,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to the Maven Central Repository
-        run: ./mvnw --batch-mode deploy -DskipTests
+        run: ./mvnw deploy -DskipTests
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          MAVEN_ID: central
 
       - name: Update CHANGELOG.md
         if: github.ref == 'refs/heads/main'
