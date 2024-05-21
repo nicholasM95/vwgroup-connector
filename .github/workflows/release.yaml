@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
 
       - name: Set up JDK
         uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4.2.1
@@ -36,6 +36,12 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version: 20
+
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v5.4.0
+        with:
+          gpg_private_key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Install Semantic Release and plugins
         run: |
@@ -56,11 +62,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Maven Deploy
+      - name: Configure maven settings
         if: github.ref == 'refs/heads/main'
-        run: ./mvnw deploy -DskipTests
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: s4u/maven-settings-action@v3.0.0
+        with:
+          servers: |
+            [{
+              "id": "central",
+              "username": "${{ secrets.OSSRH_USERNAME }}",
+              "password": "${{ secrets.OSSRH_TOKEN }}"
+            }]
+
+      - name: Publish to the Maven Central Repository
+        if: github.ref == 'refs/heads/main'
+        run: ./mvnw deploy -DskipTests -Dgpg.passphrase=${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Update CHANGELOG.md
         if: github.ref == 'refs/heads/main'

@@ -5,7 +5,7 @@
 
     <groupId>be.nicholasmeyers.vwgroup-connector</groupId>
     <artifactId>vwgroup-connector</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0-SNAPSHOT</version>
 
     <name>vwgroup-connector</name>
     <description>vwgroup-connector</description>
@@ -15,15 +15,29 @@
         <feign.version>13.2.1</feign.version>
     </properties>
 
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>VW Group Connector</name>
-            <url>https://maven.pkg.github.com/nicholasM95/vwgroup-connector</url>
-        </repository>
-    </distributionManagement>
+    <developers>
+        <developer>
+            <id>nicholasM95</id>
+            <name>Nicholas Meyers</name>
+            <email>nicholas.meyers@hotmail.com</email>
+        </developer>
+    </developers>
 
+    <scm>
+        <connection>scm:git:https://github.com/nicholasM95/vwgroup-connector.git</connection>
+        <url>https://github.com/nicholasM95/vwgroup-connector.git</url>
+        <developerConnection>scm:git:https://github.com/nicholasM95/vwgroup-connector.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <url>https://vwgroup-connector.nicholasmeyers.be</url>
 
     <dependencies>
         <dependency>
@@ -58,6 +72,7 @@
         </dependency>
 
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -67,6 +82,61 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.4.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <tokenAuth>true</tokenAuth>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

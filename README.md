@@ -15,8 +15,8 @@ To utilize the library in your Maven project, follow these steps to add the repo
 ```
 <repositories>
     <repository>
-	    <id>jitpack.io</id>
-	    <url>https://jitpack.io</url>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
     </repository>
 </repositories>
 ```
