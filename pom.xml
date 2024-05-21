@@ -13,12 +13,13 @@
     <properties>
         <java.version>21</java.version>
         <feign.version>13.2.1</feign.version>
+        <jose4j.version>0.9.6</jose4j.version>
     </properties>
 
     <licenses>
         <license>
-            <name>The Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <name>The MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
 
@@ -62,6 +63,12 @@
             <groupId>io.github.openfeign.form</groupId>
             <artifactId>feign-form</artifactId>
             <version>3.8.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bitbucket.b_c</groupId>
+            <artifactId>jose4j</artifactId>
+            <version>${jose4j.version}</version>
         </dependency>
 
         <dependency>

@@ -9,25 +9,15 @@ It is developed independently to assist developers in integrating their applicat
 
 ## Adding Maven Repository and Dependency
 
-To utilize the library in your Maven project, follow these steps to add the repository and dependency to your `pom.xml`
+To utilize the library in your Maven project, follow these steps.
 
-1. Add the Maven Repository to your `pom.xml`
-```
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-```
-
-2. Add the Maven Dependency to your `pom.xml`
+Add the Maven Dependency to your `pom.xml`
 
 ```
 <dependency>
-    <groupId>com.github.nicholasM95</groupId>
+    <groupId>be.nicholasmeyers.vwgroup-connector</groupId>
     <artifactId>vwgroup-connector</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
