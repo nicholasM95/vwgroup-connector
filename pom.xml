@@ -37,7 +37,7 @@
         <tag>HEAD</tag>
     </scm>
 
-    <url>https://vwgroup-connector.nicholasmeyers.be/</url>
+    <url>https://vwgroup-connector.nicholasmeyers.be</url>
 
     <dependencies>
         <dependency>
