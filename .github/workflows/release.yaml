@@ -33,7 +33,7 @@ jobs:
           cache: 'maven'
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v4.0.3
         with:
           node-version: 20
 
