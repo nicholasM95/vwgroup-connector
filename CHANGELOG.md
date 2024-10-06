@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/nicholasM95/vwgroup-connector/compare/v1.2.1...v1.2.2) (2024-10-06)
+
+
+### Bug Fixes
+
+* **deps:** update feign monorepo to v13.4 ([af42ce9](https://github.com/nicholasM95/vwgroup-connector/commit/af42ce9d572f6a7f62ed08d49d25369ca9225903))
+
 ## [1.2.1](https://github.com/nicholasM95/vwgroup-connector/compare/v1.2.0...v1.2.1) (2024-07-25)
 
 
