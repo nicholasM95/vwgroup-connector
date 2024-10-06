@@ -1,6 +1,13 @@
 package be.nicholasmeyers.vwgroupconnector.web.out;
 
-import be.nicholasmeyers.vwgroupconnector.resource.*;
+import be.nicholasmeyers.vwgroupconnector.resource.AuthorizationInfo;
+import be.nicholasmeyers.vwgroupconnector.resource.ConsentInfo;
+import be.nicholasmeyers.vwgroupconnector.resource.FinalAuthorizationInfo;
+import be.nicholasmeyers.vwgroupconnector.resource.SsoLogin;
+import be.nicholasmeyers.vwgroupconnector.resource.StartAuthorization;
+import be.nicholasmeyers.vwgroupconnector.resource.SuccessInfo;
+import be.nicholasmeyers.vwgroupconnector.resource.TokenInfo;
+import be.nicholasmeyers.vwgroupconnector.resource.Tokens;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
