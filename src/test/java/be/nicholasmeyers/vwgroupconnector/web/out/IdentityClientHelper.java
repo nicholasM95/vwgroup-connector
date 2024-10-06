@@ -1,12 +1,19 @@
 package be.nicholasmeyers.vwgroupconnector.web.out;
 
-import be.nicholasmeyers.vwgroupconnector.resource.*;
+import be.nicholasmeyers.vwgroupconnector.resource.AuthorizationInfo;
+import be.nicholasmeyers.vwgroupconnector.resource.ConsentInfo;
+import be.nicholasmeyers.vwgroupconnector.resource.FinalAuthorizationInfo;
+import be.nicholasmeyers.vwgroupconnector.resource.SsoLogin;
+import be.nicholasmeyers.vwgroupconnector.resource.StartAuthorization;
+import be.nicholasmeyers.vwgroupconnector.resource.SuccessInfo;
+import be.nicholasmeyers.vwgroupconnector.resource.TokenInfo;
+
+import static be.nicholasmeyers.vwgroupconnector.util.UserUtils.getEmail;
+import static be.nicholasmeyers.vwgroupconnector.util.UserUtils.getPassword;
 
 public class IdentityClientHelper {
 
     private static final String CLIENT = "7f045eee-7003-4379-9968-9355ed2adb06@apps_vw-dilab_com";
-    private static final String EMAIL = "";
-    private static final String PASSWORD = "";
     private final IdentityClientImpl identityClient;
 
     public IdentityClientHelper(IdentityClientImpl identityClient) {
@@ -25,7 +32,7 @@ public class IdentityClientHelper {
     }
 
     public void postEmail(StartAuthorization startAuthorization, AuthorizationInfo authorizationInfo) {
-        identityClient.postEmail(CLIENT, startAuthorization, authorizationInfo, EMAIL);
+        identityClient.postEmail(CLIENT, startAuthorization, authorizationInfo, getEmail());
     }
 
     public FinalAuthorizationInfo getFinalAuthorizationInfo(StartAuthorization startAuthorization, AuthorizationInfo authorizationInfo) {
@@ -33,7 +40,7 @@ public class IdentityClientHelper {
     }
 
     public SsoLogin postEmailPassword(StartAuthorization startAuthorization, AuthorizationInfo authorizationInfo, FinalAuthorizationInfo finalAuthorizationInfo) {
-        return  identityClient.postEmailPassword(CLIENT, startAuthorization, authorizationInfo, finalAuthorizationInfo, EMAIL, PASSWORD);
+        return identityClient.postEmailPassword(CLIENT, startAuthorization, authorizationInfo, finalAuthorizationInfo, getEmail(), getPassword());
     }
 
     public ConsentInfo ssoLogin(StartAuthorization startAuthorization, AuthorizationInfo authorizationInfo, SsoLogin ssoLogin) {
