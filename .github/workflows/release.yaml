@@ -64,7 +64,7 @@ jobs:
 
       - name: Configure maven settings
         if: github.ref == 'refs/heads/main'
-        uses: s4u/maven-settings-action@v3.0.0
+        uses: s4u/maven-settings-action@v3.1.0
         with:
           servers: |
             [{
