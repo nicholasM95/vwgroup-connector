@@ -1,5 +1,6 @@
 package be.nicholasmeyers.vwgroupconnector.web.out;
 
+import be.nicholasmeyers.vwgroupconnector.exception.LoginException;
 import be.nicholasmeyers.vwgroupconnector.resource.*;
 import be.nicholasmeyers.vwgroupconnector.service.IdentityService;
 import be.nicholasmeyers.vwgroupconnector.web.out.resource.OpenidConfigurationWebResponseResource;
@@ -110,6 +111,9 @@ public class IdentityClientImpl implements IdentityService {
         Response response = identityClient.getFinalAuthenticationPage(headers, query, client);
         String responseBody = getResponseBody(response.body());
         response.close();
+        if (response.status() == 303) {
+            throw new LoginException("Failed to log in (can't get the final authorization info). Please log in manually to a browser to authorize and accept the terms and conditions.");
+        }
 
         String hmac = getHmacFromString(responseBody);
         String csrf = getCsrfFromString(responseBody);
