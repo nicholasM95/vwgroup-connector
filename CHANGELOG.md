@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/nicholasM95/vwgroup-connector/compare/v1.2.2...v1.3.0) (2024-11-13)
+
+
+### Features
+
+* add an exception with an error message. ([249aa6f](https://github.com/nicholasM95/vwgroup-connector/commit/249aa6fbf0331a62a4bb8ea57c38e0be74611258))
+
+
+### Bug Fixes
+
+* **deps:** update feign monorepo to v13.5 ([7c37272](https://github.com/nicholasM95/vwgroup-connector/commit/7c372725f0d8d185369acc9f42a837eafb37ea62))
+
 ## [1.2.2](https://github.com/nicholasM95/vwgroup-connector/compare/v1.2.1...v1.2.2) (2024-10-06)
 
 
