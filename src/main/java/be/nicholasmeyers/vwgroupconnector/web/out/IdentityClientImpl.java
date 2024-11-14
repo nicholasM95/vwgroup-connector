@@ -61,7 +61,7 @@ public class IdentityClientImpl implements IdentityService {
         String cookie = getCookieHeader(response.headers());
         cookie = cookie.substring(0, cookie.indexOf(";"));
         String relayState = location.substring(location.indexOf("?relayState") + 12);
-        return new StartAuthorization(cookie, relayState);
+        return new StartAuthorization(cookie, relayState, location);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class IdentityClientImpl implements IdentityService {
         String responseBody = getResponseBody(response.body());
         response.close();
         if (response.status() == 303) {
-            throw new LoginException("Failed to log in (can't get the final authorization info). Please log in manually to a browser to authorize and accept the terms and conditions.");
+            throw new LoginException("Failed to log in (can't get the final authorization info). Please log in manually to a browser to authorize and accept the terms and conditions.", startAuthorization.getLoginUrl());
         }
 
         String hmac = getHmacFromString(responseBody);
@@ -133,6 +133,9 @@ public class IdentityClientImpl implements IdentityService {
         headers.put("Cookie", startAuthorization.getCookie() + "; " + authorizationInfo.getCookie());
         Response response = identityClient.postEmailPassword(resource, headers, client);
         response.close();
+        if (response.status() == 303) {
+            throw new LoginException("Failed to log in (can't get the final authorization info). Please log in manually to a browser to authorize and accept the terms and conditions.", startAuthorization.getLoginUrl());
+        }
 
         String location = getLocationHeader(response.headers());
         String user = location.substring(location.indexOf("userId") + 7);
@@ -156,7 +159,7 @@ public class IdentityClientImpl implements IdentityService {
         Response response = identityClient.ssoLogin(headers, query);
         response.close();
         if (response.status() == 400) {
-            throw new LoginException("Failed to log in (can't get the final authorization info). Please log in manually to a browser to authorize and accept the terms and conditions.");
+            throw new LoginException("Failed to log in (can't get the final authorization info). Please log in manually to a browser to authorize and accept the terms and conditions.", startAuthorization.getLoginUrl());
         }
 
         String location = getLocationHeader(response.headers());
