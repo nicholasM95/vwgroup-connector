@@ -155,6 +155,9 @@ public class IdentityClientImpl implements IdentityService {
 
         Response response = identityClient.ssoLogin(headers, query);
         response.close();
+        if (response.status() == 400) {
+            throw new LoginException("Failed to log in (can't get the final authorization info). Please log in manually to a browser to authorize and accept the terms and conditions.");
+        }
 
         String location = getLocationHeader(response.headers());
         String hmac = location.substring(location.indexOf("hmac") + 5);
