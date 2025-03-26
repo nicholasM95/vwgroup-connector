@@ -1,3 +1,5 @@
+# [2.0.0](https://github.com/nicholasM95/vwgroup-connector/compare/v1.3.5...v2.0.0) (2025-03-26)
+
 ## [1.3.5](https://github.com/nicholasM95/vwgroup-connector/compare/v1.3.4...v1.3.5) (2025-03-26)
 
 ## [1.3.2](https://github.com/nicholasM95/vwgroup-connector/compare/v1.3.1...v1.3.2) (2024-12-14)
