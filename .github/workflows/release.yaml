@@ -63,18 +63,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure maven settings
-        if: github.ref == 'refs/heads/main'
         uses: s4u/maven-settings-action@v3.1.0
         with:
           servers: |
             [{
-              "id": "central",
+              "id": "ossrh",
               "username": "${{ secrets.OSSRH_USERNAME }}",
               "password": "${{ secrets.OSSRH_TOKEN }}"
             }]
 
       - name: Publish to the Maven Central Repository
-        if: github.ref == 'refs/heads/main'
         run: ./mvnw deploy -DskipTests -Dgpg.passphrase=${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Update CHANGELOG.md
