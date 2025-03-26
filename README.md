@@ -17,7 +17,7 @@ Add the Maven Dependency to your `pom.xml`
 <dependency>
     <groupId>be.nicholasmeyers.vwgroup-connector</groupId>
     <artifactId>vwgroup-connector</artifactId>
-    <version>1.3.3</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
@@ -40,7 +40,5 @@ The following applications are available, choose the correct client for your imp
 
 ```
 Client.CONNECT
-Client.SKODA
-Client.SMARTLINK
 Client.VWG
 ```
