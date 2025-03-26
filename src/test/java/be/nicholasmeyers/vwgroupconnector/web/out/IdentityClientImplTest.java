@@ -118,6 +118,7 @@ public class IdentityClientImplTest {
 
         TokenInfo tokenInfo = identityClientHelper.handleSuccess(startAuthorization, authorizationInfo, ssoLogin, successInfo);
         Assertions.assertNotNull(tokenInfo.getAuthCode());
-        Assertions.assertNotNull(tokenInfo.getIdToken());
+        Assertions.assertNotNull(tokenInfo.getRedirectUri());
+        Assertions.assertNotNull(tokenInfo.getVerifier());
     }
 }

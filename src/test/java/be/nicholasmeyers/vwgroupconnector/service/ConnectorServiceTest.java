@@ -23,6 +23,7 @@ public class ConnectorServiceTest {
         Tokens tokens = connectorService.getTokens(Client.CONNECT, getEmail(), getPassword());
         Assertions.assertNotNull(tokens.getAccessToken());
         Assertions.assertNotNull(tokens.getIdToken());
+        Assertions.assertNotNull(tokens.getRefreshToken());
     }
 
     @Test
@@ -30,6 +31,7 @@ public class ConnectorServiceTest {
         Tokens tokens = connectorService.getTokens(Client.SKODA, getEmail(), getPassword());
         Assertions.assertNotNull(tokens.getAccessToken());
         Assertions.assertNotNull(tokens.getIdToken());
+        Assertions.assertNotNull(tokens.getRefreshToken());
     }
 
     @Test
@@ -37,6 +39,7 @@ public class ConnectorServiceTest {
         Tokens tokens = connectorService.getTokens(Client.SMARTLINK, getEmail(), getPassword());
         Assertions.assertNotNull(tokens.getAccessToken());
         Assertions.assertNotNull(tokens.getIdToken());
+        Assertions.assertNotNull(tokens.getRefreshToken());
     }
 
     @Test
@@ -44,5 +47,6 @@ public class ConnectorServiceTest {
         Tokens tokens = connectorService.getTokens(Client.VWG, getEmail(), getPassword());
         Assertions.assertNotNull(tokens.getAccessToken());
         Assertions.assertNotNull(tokens.getIdToken());
+        Assertions.assertNotNull(tokens.getRefreshToken());
     }
 }

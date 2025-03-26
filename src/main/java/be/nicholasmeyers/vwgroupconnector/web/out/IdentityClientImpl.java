@@ -14,6 +14,10 @@ import feign.jackson.JacksonDecoder;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,19 +53,32 @@ public class IdentityClientImpl implements IdentityService {
 
     @Override
     public StartAuthorization getAuthorizationEndpoint(String redirectUri, String client, String scope, String responseType) {
+        String codeVerifier = generateCodeVerifier();
+        String codeChallenge = "";
+
+        try {
+            codeChallenge = generateCodeChallenge(codeVerifier);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
         Map<String, String> query = new HashMap<>();
         query.put("redirect_uri", redirectUri);
         query.put("client_id", client);
         query.put("scope", scope);
         query.put("response_type", responseType);
         query.put("nonce", getNonce());
+        query.put("code_challenge", codeChallenge);
+        query.put("code_challenge_method", "s256");
+        query.put("prompt", "login");
+
         Response response = identityClient.getAuthorizationEndpoint(query);
         response.close();
         String location = getLocationHeader(response.headers());
         String cookie = getCookieHeader(response.headers());
         cookie = cookie.substring(0, cookie.indexOf(";"));
         String relayState = location.substring(location.indexOf("?relayState") + 12);
-        return new StartAuthorization(cookie, relayState, location);
+        return new StartAuthorization(cookie, relayState, location, redirectUri, codeVerifier);
     }
 
     @Override
@@ -208,7 +225,7 @@ public class IdentityClientImpl implements IdentityService {
 
         String idToken = location.substring(location.indexOf("id_token") + 9);
 
-        return new TokenInfo(authCode, idToken);
+        return new TokenInfo(authCode, startAuthorization.getRedirectUrl(), startAuthorization.getCodeVerifier());
     }
 
     private String getNonce() {
@@ -223,5 +240,22 @@ public class IdentityClientImpl implements IdentityService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static String generateCodeVerifier() {
+        SecureRandom random = new SecureRandom();
+        byte[] codeVerifier = new byte[32];
+        random.nextBytes(codeVerifier);
+        return base64UrlEncode(codeVerifier);
+    }
+
+    private static String generateCodeChallenge(String codeVerifier) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(codeVerifier.getBytes(StandardCharsets.UTF_8));
+        return base64UrlEncode(hash);
+    }
+
+    private static String base64UrlEncode(byte[] input) {
+        return java.util.Base64.getUrlEncoder().withoutPadding().encodeToString(input);
     }
 }

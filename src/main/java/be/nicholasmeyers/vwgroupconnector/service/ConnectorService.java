@@ -56,7 +56,7 @@ public class ConnectorService {
 
         if (Client.VWG.equals(client)) {
             String idToken = tokenService.getTokens(tokenInfo).getIdToken();
-            Tokens tokens = new Tokens(vwgService.getAccessToken(idToken), idToken);
+            Tokens tokens = new Tokens(vwgService.getAccessToken(idToken), idToken, "");
             cache.put(client, tokens);
             return tokens;
         } else {
