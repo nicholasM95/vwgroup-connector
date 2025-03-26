@@ -73,7 +73,9 @@ jobs:
             }]
 
       - name: Publish to the Maven Central Repository
-        run: ./mvnw deploy -DskipTests -Dgpg.passphrase=${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        run: ./mvnw deploy -DskipTests
+        env:
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Update CHANGELOG.md
         if: github.ref == 'refs/heads/main'
