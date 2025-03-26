@@ -1,12 +1,9 @@
 package be.nicholasmeyers.vwgroupconnector.web.out.resource;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class TokenWebResponseResource {
-    @JsonProperty("access_token")
     private String accessToken;
-    @JsonProperty("id_token")
     private String idToken;
+    private String refreshToken;
 
     public String getAccessToken() {
         return accessToken;
@@ -22,5 +19,13 @@ public class TokenWebResponseResource {
 
     public void setIdToken(String idToken) {
         this.idToken = idToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

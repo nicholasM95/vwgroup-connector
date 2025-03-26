@@ -21,8 +21,8 @@ public class IdentityClientHelper {
     }
 
     public StartAuthorization getStartAuthorization() {
-        String redirectUri = "skodaconnect://oidc.login/";
-        String scope = "openid profile address cars email birthdate badge mbb phone driversLicense dealers profession vin";
+        String redirectUri = "myskoda://redirect/login/";
+        String scope = "openid profile address cars email birthdate badge mbb phone driversLicense nationalIdentifier dealers mileage profession vin";
         String responseType = "code id_token";
         return identityClient.getAuthorizationEndpoint(redirectUri, CLIENT, scope, responseType);
     }
@@ -48,10 +48,10 @@ public class IdentityClientHelper {
     }
 
     public SuccessInfo checkConsent(StartAuthorization startAuthorization, AuthorizationInfo authorizationInfo, SsoLogin ssoLogin, ConsentInfo consentInfo) {
-        return identityClient.checkConsent(CLIENT, startAuthorization, authorizationInfo, consentInfo, "openid profile address cars email birthdate badge mbb phone driversLicense dealers profession vin", ssoLogin.getUser());
+        return identityClient.checkConsent(CLIENT, startAuthorization, authorizationInfo, consentInfo, "openid profile address cars email birthdate badge mbb phone driversLicense nationalIdentifier dealers mileage profession vin", ssoLogin.getUser());
     }
 
     public TokenInfo handleSuccess(StartAuthorization startAuthorization, AuthorizationInfo authorizationInfo, SsoLogin ssoLogin, SuccessInfo successInfo) {
-        return identityClient.handleSuccess(CLIENT, startAuthorization, authorizationInfo, successInfo, "openid profile address cars email birthdate badge mbb phone driversLicense dealers profession vin", ssoLogin.getUser());
+        return identityClient.handleSuccess(CLIENT, startAuthorization, authorizationInfo, successInfo, "openid profile address cars email birthdate badge mbb phone driversLicense nationalIdentifier dealers mileage profession vin", ssoLogin.getUser());
     }
 }
