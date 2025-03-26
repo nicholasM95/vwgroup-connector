@@ -27,22 +27,6 @@ public class ConnectorServiceTest {
     }
 
     @Test
-    public void testSkoda() {
-        Tokens tokens = connectorService.getTokens(Client.SKODA, getEmail(), getPassword());
-        Assertions.assertNotNull(tokens.getAccessToken());
-        Assertions.assertNotNull(tokens.getIdToken());
-        Assertions.assertNotNull(tokens.getRefreshToken());
-    }
-
-    @Test
-    public void testSmartlink() {
-        Tokens tokens = connectorService.getTokens(Client.SMARTLINK, getEmail(), getPassword());
-        Assertions.assertNotNull(tokens.getAccessToken());
-        Assertions.assertNotNull(tokens.getIdToken());
-        Assertions.assertNotNull(tokens.getRefreshToken());
-    }
-
-    @Test
     public void testVWG() {
         Tokens tokens = connectorService.getTokens(Client.VWG, getEmail(), getPassword());
         Assertions.assertNotNull(tokens.getAccessToken());

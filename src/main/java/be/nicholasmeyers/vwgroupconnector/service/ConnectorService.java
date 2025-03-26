@@ -39,8 +39,8 @@ public class ConnectorService {
             return cache.get(client);
         }
         log.info("Get new tokens from vw group.");
-        Map<String, String> clientConfig = getClientConfig(client.name().toLowerCase());
-        String redirectUri = "skodaconnect://oidc.login/";
+        Map<String, String> clientConfig = getClientConfig();
+        String redirectUri = clientConfig.get("redirect_uri");
         String clientId = clientConfig.get("client_id");
         String scope = clientConfig.get("scope");
         String responseType = clientConfig.get("token_types");
