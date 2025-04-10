@@ -1,3 +1,9 @@
+# 🚨 Repository Moved
+This repository is no longer maintained here.
+
+### ➡️ The project has been moved to a new location: 
+[Škoda Connector](https://github.com/nicholasM95/skoda-connector)
+
 # VW Group Connector
 
 This project provides a convenient solution for obtaining access tokens and id tokens for various applications within the Volkswagen Group ecosystem. 
